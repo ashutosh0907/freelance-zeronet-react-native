@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {View, Text, TouchableOpacity, Image, Animated} from 'react-native';
 import React from 'react';
 import {customButtonStyles} from './CustomButtonStyles';

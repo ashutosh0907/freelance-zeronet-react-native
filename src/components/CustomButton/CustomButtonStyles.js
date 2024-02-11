@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {StyleSheet} from 'react-native';
 import {BRAND, WHITE} from '../../constants/color';
 import {BOLD, MEDIUM} from '../../constants/fontfamily';
@@ -6,7 +7,7 @@ import {WIDTH} from '../../constants/config';
 export const customButtonStyles = StyleSheet.create({
   buttonview: {
     height: 47,
-    borderRadius: 7,
+    borderRadius: 10,
     elevation: 3,
     justifyContent: 'center',
     alignItems: 'center',
