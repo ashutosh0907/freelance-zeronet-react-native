@@ -28,6 +28,7 @@ const Splash = ({navigation}) => {
           }}>
           <View style={splashStyles.logoContainer}>
             <Image
+              tintColor={WHITE}
               resizeMode={'contain'}
               style={{
                 alignSelf: 'center',

@@ -8,7 +8,7 @@ export const splashStyles = StyleSheet.create({
     backgroundColor: WHITE,
   },
   logoContainer: {
-    width: WIDTH * 0.5,
+    width: WIDTH * 0.6,
     height: HEIGHT * 0.15,
   },
 });

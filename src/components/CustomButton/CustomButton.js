@@ -5,7 +5,7 @@ import {WIDTH} from '../../constants/config';
 import {BRAND, WHITE} from '../../constants/color';
 
 const CustomButton = ({
-  width = WIDTH * 0.9,
+  width = '90%',
   title,
   onPress,
   icon,

@@ -1,16 +1,37 @@
-import {View, Text, Platform} from 'react-native';
+import {View, Text, Platform, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Geolocation from 'react-native-geolocation-service';
 import {useEffect} from 'react';
-import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {useState} from 'react';
+import {Loader} from '../../components/Loader';
+import {BLACK, GRAY} from '../../constants/color';
+import {RFValue} from 'react-native-responsive-fontsize';
+import CustomButton from '../../components/CustomButton';
 
 const Claim = () => {
+  const [permissionStatus, setPermissionStatus] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [coordinates, setCoordinates] = useState({latitude: '', longitude: ''});
   useEffect(() => {
     getLocationPermission();
   }, []);
 
-  const getLocationPermission = () => {
+  const getLocationPermission = async () => {
     console.log('first');
+    await request(
+      Platform.OS === 'ios'
+        ? PERMISSIONS.IOS.ACCESS_FINE_LOCATION
+        : PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+    ).then(result => {
+      console.log(result);
+      if (result == 'granted') {
+        setPermissionStatus(true);
+      }
+    });
+  };
+
+  const checkLocationPermission = () => {
     if (Platform.OS == 'android') {
       check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION)
         .then(result => {
@@ -78,9 +99,56 @@ const Claim = () => {
     }
   };
 
+  const getGeolocationDetails = async () => {
+    setLoader(true);
+    if (permissionStatus) {
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log(position);
+          const {latitude, longitude} = position.coords;
+          console.log('Latitude: ', latitude);
+          console.log('Longitide: ', longitude);
+          setCoordinates({latitude: latitude, longitude: longitude});
+          setLoader(false);
+        },
+        error => {
+          console.log(error.code, error.message);
+        },
+        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      );
+    }
+  };
+
   return (
-    <View>
-      <Text>Claim</Text>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Loader visible={loader} />
+
+      <CustomButton
+        onPress={() => {
+          getGeolocationDetails();
+        }}
+        title={'Login'}
+        width={'85%'}
+      />
+      <Text
+        style={{
+          color: BLACK,
+          fontSize: RFValue(15),
+        }}>
+        Latitude: {coordinates.latitude}
+      </Text>
+      <Text
+        style={{
+          color: BLACK,
+          fontSize: RFValue(15),
+        }}>
+        Longitude: {coordinates.longitude}
+      </Text>
     </View>
   );
 };

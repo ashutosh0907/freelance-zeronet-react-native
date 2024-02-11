@@ -1,30 +1,31 @@
-import React from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import { HEIGHT, STYLES, WIDTH } from "../constants/config";
+import React from 'react';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {HEIGHT, STYLES, WIDTH} from '../constants/config';
 import {
   BLACK,
+  GRAY,
   LIGHTGRAY,
   RED,
   TEXTINPUTBACKGROUND,
   TEXTINPUTTITLE,
   WHITE,
-} from "../constants/color";
-import { RFValue } from "react-native-responsive-fontsize";
-import LinearGradient from "react-native-linear-gradient";
-import { MEDIUM, REGULAR } from "../constants/fontfamily";
+} from '../constants/color';
+import {RFValue} from 'react-native-responsive-fontsize';
+import LinearGradient from 'react-native-linear-gradient';
+import {EXTRABOLD, MEDIUM, REGULAR} from '../constants/fontfamily';
 
 export const CustomTextInput = ({
-  title = "",
+  title = '',
   value = null,
-  placeholder = "",
+  placeholder = '',
   width = WIDTH * 0.9,
-  keyboardType = "default",
+  keyboardType = 'default',
   maxLength,
   onChangeText,
   editable = true,
   autoFocus = false,
   isPhonenumber = false,
-  autoCapitalize = "none",
+  autoCapitalize = 'none',
   hasCallback = false,
   callbackMethod,
   secureTextEntry,
@@ -38,56 +39,54 @@ export const CustomTextInput = ({
     <View
       style={{
         width: width ? width : WIDTH,
-      }}
-    >
-      <View style={{ marginVertical: "1%" }}>
+      }}>
+      <View style={{marginVertical: '1%'}}>
         <Text
           style={{
-            color: TEXTINPUTTITLE,
-            fontFamily: MEDIUM,
-            fontSize: RFValue(13),
+            color: BLACK,
+            fontFamily: EXTRABOLD,
+            fontSize: RFValue(15),
             paddingLeft: HEIGHT * 0.0059,
-          }}
-        >
-          {title} <Text style={{ color: RED }}>{mandatory && "*"}</Text>
+            fontWeight: 'bold',
+          }}>
+          {title} <Text style={{color: RED}}>{mandatory && '*'}</Text>
         </Text>
       </View>
       <View
         style={{
           borderRadius: 7,
           borderWidth: 0.6,
-          borderColor: TEXTINPUTBACKGROUND,
+          borderColor: '#C8C8C8',
           marginTop: 1,
-          marginBottom: 10,
-        }}
-      >
+          marginBottom: HEIGHT * 0.005,
+          borderWidth: 1,
+        }}>
         <LinearGradient
-          end={{ x: 1, y: 1 }}
-          start={{ x: 1, y: 1 }}
-          colors={[TEXTINPUTBACKGROUND, TEXTINPUTBACKGROUND]}
+          end={{x: 1, y: 1}}
+          start={{x: 1, y: 1}}
+          colors={[WHITE, WHITE]}
           style={{
             opacity: editable ? 1 : 0.5,
-            borderRadius: 4,
+            borderRadius: 7,
             height: 48,
-            flexDirection: "row",
-          }}
-        >
+            flexDirection: 'row',
+            borderColor: GRAY,
+          }}>
           {isPhonenumber && (
             <View
               style={{
                 width: WIDTH * 0.13,
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
               <Text
                 style={{
                   fontSize: RFValue(14),
                   color: BLACK,
-                  fontFamily: MEDIUM,
-                }}
-              >
+                  fontFamily: EXTRABOLD,
+                  fontWeight: 'bold',
+                }}>
                 +91
               </Text>
             </View>
@@ -97,7 +96,7 @@ export const CustomTextInput = ({
             autoFocus={autoFocus}
             secureTextEntry={secureTextEntry}
             editable={editable}
-            onChangeText={(txt) => {
+            onChangeText={txt => {
               // if (!/[0-9,.*-@]/.test(txt.slice(-1))) {
               if (hasCallback) {
                 callbackMethod(txt);
@@ -112,7 +111,7 @@ export const CustomTextInput = ({
             autoCapitalize={autoCapitalize}
             value={value}
             placeholder={placeholder}
-            placeholderTextColor={LIGHTGRAY}
+            placeholderTextColor={'#787878'}
             style={{
               ...Styles.inputTextStyle,
             }}
@@ -128,17 +127,18 @@ const Styles = StyleSheet.create({
   viewForTextInput: {
     ...STYLES.elevation,
     height: 60,
-    alignSelf: "center",
+    alignSelf: 'center',
     borderRadius: 7,
     borderWidth: 0.6,
-    borderColor: WHITE,
+    borderColor: GRAY,
     marginTop: 5,
-    // backgroundColor: "red",
+    // backgroundColor: 'red',
   },
   inputTextStyle: {
     fontSize: RFValue(13),
     color: BLACK,
-    fontFamily: REGULAR,
+    fontFamily: EXTRABOLD,
+    fontWeight: 'bold',
     marginLeft: 5,
     flex: 1,
     paddingLeft: 10,
