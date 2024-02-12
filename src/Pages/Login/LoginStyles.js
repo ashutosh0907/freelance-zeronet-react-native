@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {StyleSheet} from 'react-native';
 import {BLACK, BRAND, LIGHTGRAY, WHITE} from '../../constants/color';
-import {BOLD, MEDIUM} from '../../constants/fontfamily';
+import {BOLD, EXTRABOLD, MEDIUM} from '../../constants/fontfamily';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {HEIGHT, WIDTH} from '../../constants/config';
 export const loginStyles = StyleSheet.create({
@@ -35,39 +35,39 @@ export const loginStyles = StyleSheet.create({
   },
   logincontainer: {
     width: WIDTH * 0.9,
-    height: HEIGHT * 0.5,
+    height: HEIGHT * 0.4,
+    // backgroundColor: 'red',
   },
   loginheader: {
     marginTop: HEIGHT * 0.01,
     width: WIDTH * 0.8,
     alignSelf: 'center',
-    height: HEIGHT * 0.1,
+    // marginBottom: HEIGHT * 0.03,
   },
   msgtext: {
-    fontWeight: 'bold',
-
     color: BLACK,
-    fontFamily: BOLD,
     fontSize: RFValue(25),
     textAlign: 'left',
+    fontFamily: EXTRABOLD,
+    fontWeight: 'bold',
   },
   btn: {
     width: WIDTH * 0.5,
-    // position: 'absolute',
-    // bottom: 25,
   },
   imageContainer: {
-    marginTop: HEIGHT * 0.1,
+    width: WIDTH * 0.5,
     height: WIDTH * 0.2,
     alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
-    width: WIDTH * 0.28,
-    height: WIDTH * 0.2,
+    width: '100%',
+    height: '90%',
     tintColor: BRAND,
   },
   credentialView: {
-    marginTop: HEIGHT * 0.01,
-    marginLeft: HEIGHT * 0.02,
+    width: '90%',
+    alignSelf: 'center',
   },
 });
