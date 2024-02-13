@@ -1,4 +1,6 @@
-/* eslint-disable prettier/prettier */
+// SignUp.js
+
+import React, {Fragment, useState} from 'react';
 import {
   View,
   Text,
@@ -10,44 +12,29 @@ import {
   Alert,
   BackHandler,
 } from 'react-native';
-import React, {Fragment} from 'react';
-import {BLACK, BRAND, WHITE} from '../../constants/color';
+import {HEIGHT, MyStatusBar} from '../../constants/config';
+import {BRAND, WHITE} from '../../constants/color';
 import CustomButton from '../../components/CustomButton';
-import {loginStyles} from './LoginStyles';
-import {HEIGHT, MyStatusBar, WIDTH} from '../../constants/config';
-import {LOGO} from '../../constants/imagepath';
 import {CustomTextInput} from '../../components/CustomTextInput';
-import {Loader} from '../../components/Loader';
-import {useState} from 'react';
+import signupStyles from './SignupStyles'; // Import signupStyles from SignUpsignupStyles
+import {LOGO} from '../../constants/imagepath';
 import {appStyles} from '../../styles/AppStyles';
+import {Loader} from '../../components/Loader';
+import Header from '../../components/Header';
+import {loginStyles} from '../Login/LoginStyles';
 import {EXTRABOLD, REGULAR} from '../../constants/fontfamily';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {useFocusEffect} from '@react-navigation/native';
 
-const Login = ({navigation}) => {
-  const [loader, setLoader] = useState(false);
+const SignUp = ({navigation}) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loader, setLoader] = useState('');
 
-  useFocusEffect(() => {
-    const backAction = () => {
-      Alert.alert('', 'Are you sure you want to Exit app?', [
-        {
-          text: 'Cancel',
-          onPress: () => null,
-          style: 'cancel',
-        },
-        {text: 'YES', onPress: () => BackHandler.exitApp()},
-      ]);
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      backAction,
-    );
-    return () => backHandler.remove();
-  });
+  const handleSignUp = () => {
+    // Your sign up logic here
+    console.log('Signing up with:', name, email, password);
+  };
 
   return (
     <Fragment>
@@ -57,6 +44,14 @@ const Login = ({navigation}) => {
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{flex: 1}}>
+          <View style={{width: '90%', alignSelf: 'center'}}>
+            <Header
+              title={''}
+              onIconPress={() => {
+                navigation.goBack();
+              }}
+            />
+          </View>
           <ScrollView
             keyboardShouldPersistTaps={'handled'}
             showsVerticalScrollIndicator={false}
@@ -65,21 +60,20 @@ const Login = ({navigation}) => {
               alignItems: 'center',
               paddingBottom: 20, // Adjust padding bottom to ensure space for scrolling
             }}>
-            <View style={{height: HEIGHT * 0.1}} />
-            <View style={loginStyles.imageContainer}>
+            <View style={signupStyles.imageContainer}>
               <Image
                 source={LOGO}
                 resizeMode="contain"
-                style={loginStyles.image}
+                style={signupStyles.image}
               />
             </View>
-            <View style={loginStyles.logincontainer}>
+            <View style={{...loginStyles.logincontainer, height: HEIGHT * 0.5}}>
               <View style={loginStyles.loginheader}>
                 <Text
                   style={{
                     ...loginStyles.msgtext,
                   }}>
-                  Log in
+                  Create Account
                 </Text>
                 <Text
                   style={{
@@ -88,8 +82,17 @@ const Login = ({navigation}) => {
                     fontSize: RFValue(14),
                     marginBottom: HEIGHT * 0.02,
                   }}>
-                  Log into your account to claim !
+                  Sign-in to claim !
                 </Text>
+              </View>
+              <View style={loginStyles.credentialView}>
+                <CustomTextInput
+                  title="Name"
+                  placeholder="Enter your name"
+                  width={'90%'}
+                  value={name}
+                  onChangeText={setName}
+                />
               </View>
               <View style={loginStyles.credentialView}>
                 <CustomTextInput
@@ -128,8 +131,8 @@ const Login = ({navigation}) => {
               </View>
             </View>
             <CustomButton
-              onPress={() => navigation.navigate('Terms')}
-              title={'Login'}
+              onPress={() => navigation.navigate('Login')}
+              title={'Create Account'}
               width={'81%'}
             />
             <View
@@ -144,15 +147,15 @@ const Login = ({navigation}) => {
                   fontSize: RFValue(15),
                   fontWeight: 'bold',
                 }}>
-                Dont have an account?{' '}
+                Already have an account?{' '}
                 <Text
                   onPress={() => {
-                    navigation.navigate('Signup');
+                    navigation.navigate('Login');
                   }}
                   style={{
                     color: BRAND,
                   }}>
-                  Create Account
+                  Log in
                 </Text>
               </Text>
             </View>
@@ -164,4 +167,8 @@ const Login = ({navigation}) => {
   );
 };
 
-export default Login;
+export default SignUp;
+
+/*
+
+*/

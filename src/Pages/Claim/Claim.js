@@ -1,13 +1,29 @@
-import {View, Text, Platform, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Platform,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView,
+  SafeAreaView,
+  Image,
+} from 'react-native';
 import React from 'react';
 import Geolocation from 'react-native-geolocation-service';
 import {useEffect} from 'react';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import {useState} from 'react';
-import {Loader} from '../../components/Loader';
-import {BLACK, GRAY} from '../../constants/color';
+import {BLACK, GRAY, WHITE} from '../../constants/color';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '../../components/CustomButton';
+import {HEIGHT, MyStatusBar} from '../../constants/config';
+import {Fragment} from 'react';
+import {appStyles} from '../../styles/AppStyles';
+import {Loader} from './../../components/Loader';
+import {loginStyles} from '../Login/LoginStyles';
+import {EXTRABOLD, REGULAR} from '../../constants/fontfamily';
+import {claimStyles} from './ClaimStyles';
+import {CLAIM} from '../../constants/imagepath';
 
 const Claim = () => {
   const [permissionStatus, setPermissionStatus] = useState(false);
@@ -120,37 +136,100 @@ const Claim = () => {
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Loader visible={loader} />
-
-      <CustomButton
-        onPress={() => {
-          getGeolocationDetails();
-        }}
-        title={'Login'}
-        width={'85%'}
-      />
-      <Text
-        style={{
-          color: BLACK,
-          fontSize: RFValue(15),
-        }}>
-        Latitude: {coordinates.latitude}
-      </Text>
-      <Text
-        style={{
-          color: BLACK,
-          fontSize: RFValue(15),
-        }}>
-        Longitude: {coordinates.longitude}
-      </Text>
-    </View>
+    <Fragment>
+      <MyStatusBar backgroundColor={WHITE} barStyle={'dark-content'} />
+      <SafeAreaView style={appStyles.safeareacontainer}>
+        <Loader visible={loader} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{flex: 1}}>
+          <ScrollView
+            keyboardShouldPersistTaps={'handled'}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{
+              flexGrow: 1,
+              alignItems: 'center',
+              paddingBottom: 20, // Adjust padding bottom to ensure space for scrolling
+            }}>
+            <View style={{height: HEIGHT * 0.1}} />
+            <View style={{...loginStyles.logincontainer}}>
+              <View style={loginStyles.loginheader}>
+                <Text
+                  style={{
+                    ...loginStyles.msgtext,
+                  }}>
+                  Claims
+                </Text>
+                <Text
+                  style={{
+                    color: '#787878',
+                    fontFamily: REGULAR,
+                    fontSize: RFValue(14),
+                    marginBottom: HEIGHT * 0.02,
+                  }}>
+                  Lorem ipsum dolor sit amet consectetur. Mi vitae vel sed
+                  ultricies eleifend egestas ultricies.
+                </Text>
+              </View>
+              <View style={claimStyles.imageContainer}>
+                <Image
+                  resizeMode={'contain'}
+                  style={claimStyles.image}
+                  source={CLAIM}
+                />
+              </View>
+            </View>
+            <View style={claimStyles.claimIdContainer}>
+              <Text style={claimStyles.titleText}>Your claim id is</Text>
+              <Text style={claimStyles.idText}>#34232523523</Text>
+            </View>
+            <View style={{height: HEIGHT * 0.05}} />
+            <CustomButton
+              onPress={() => {
+                console.log('ashutosh');
+              }}
+              title={'Generate claim'}
+              width={'81%'}
+            />
+            <View style={{height: HEIGHT * 0.05}} />
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </Fragment>
   );
 };
 
 export default Claim;
+
+/*
+
+
+<CustomButton
+        onPress={() => {
+          getGeolocationDetails();
+        }}
+        title={'Extract Geo-coordinates'}
+        width={'85%'}
+      />
+{coordinates.latitude && (
+        <View
+          style={{
+            marginTop: HEIGHT * 0.02,
+          }}>
+          <Text
+            style={{
+              color: BLACK,
+              fontSize: RFValue(15),
+            }}>
+            Latitude: {coordinates.latitude}
+          </Text>
+          <Text
+            style={{
+              color: BLACK,
+              fontSize: RFValue(15),
+            }}>
+            Longitude: {coordinates.longitude}
+          </Text>
+        </View>
+      )}
+*/

@@ -34,15 +34,13 @@ export const loginStyles = StyleSheet.create({
     alignSelf: 'center',
   },
   logincontainer: {
-    width: WIDTH * 0.9,
+    width: '90%',
     height: HEIGHT * 0.4,
-    // backgroundColor: 'red',
   },
   loginheader: {
     marginTop: HEIGHT * 0.01,
-    width: WIDTH * 0.8,
+    width: '90%',
     alignSelf: 'center',
-    // marginBottom: HEIGHT * 0.03,
   },
   msgtext: {
     color: BLACK,
@@ -67,7 +65,9 @@ export const loginStyles = StyleSheet.create({
     tintColor: BRAND,
   },
   credentialView: {
-    width: '90%',
+    width: '100%',
     alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
