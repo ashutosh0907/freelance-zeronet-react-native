@@ -88,7 +88,7 @@ const Login = ({navigation}) => {
                     fontSize: RFValue(14),
                     marginBottom: HEIGHT * 0.02,
                   }}>
-                  Log into your account to claim !
+                  Log into your account to claim the ID
                 </Text>
               </View>
               <View style={loginStyles.credentialView}>
@@ -129,6 +129,7 @@ const Login = ({navigation}) => {
             </View>
             <CustomButton
               onPress={() => navigation.navigate('Terms')}
+              borderColor={BRAND}
               title={'Login'}
               width={'81%'}
             />
@@ -144,7 +145,7 @@ const Login = ({navigation}) => {
                   fontSize: RFValue(15),
                   fontWeight: 'bold',
                 }}>
-                Dont have an account?{' '}
+                Don't have an account?{' '}
                 <Text
                   onPress={() => {
                     navigation.navigate('Signup');

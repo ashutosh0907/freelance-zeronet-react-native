@@ -13,7 +13,7 @@ import Geolocation from 'react-native-geolocation-service';
 import {useEffect} from 'react';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import {useState} from 'react';
-import {BLACK, GRAY, WHITE} from '../../constants/color';
+import {BLACK, BRAND, GRAY, WHITE} from '../../constants/color';
 import {RFValue} from 'react-native-responsive-fontsize';
 import CustomButton from '../../components/CustomButton';
 import {HEIGHT, MyStatusBar} from '../../constants/config';
@@ -24,8 +24,9 @@ import {loginStyles} from '../Login/LoginStyles';
 import {EXTRABOLD, REGULAR} from '../../constants/fontfamily';
 import {claimStyles} from './ClaimStyles';
 import {CLAIM} from '../../constants/imagepath';
+import Header from '../../components/Header';
 
-const Claim = () => {
+const Claim = ({navigation}) => {
   const [permissionStatus, setPermissionStatus] = useState(false);
   const [loader, setLoader] = useState(false);
   const [coordinates, setCoordinates] = useState({latitude: '', longitude: ''});
@@ -135,6 +136,14 @@ const Claim = () => {
     }
   };
 
+  const skipCallback = () => {
+    setLoader(true);
+    setTimeout(() => {
+      navigation.navigate('Login');
+      setLoader(false);
+    }, 1000);
+  };
+
   return (
     <Fragment>
       <MyStatusBar backgroundColor={WHITE} barStyle={'dark-content'} />
@@ -143,6 +152,16 @@ const Claim = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{flex: 1}}>
+          <View style={{width: '90%', alignSelf: 'center'}}>
+            <Header
+              title={''}
+              onIconPress={() => {
+                navigation.goBack();
+              }}
+              logoutShown={true}
+              skipCallback={skipCallback}
+            />
+          </View>
           <ScrollView
             keyboardShouldPersistTaps={'handled'}
             showsVerticalScrollIndicator={false}
@@ -166,10 +185,7 @@ const Claim = () => {
                     fontFamily: REGULAR,
                     fontSize: RFValue(14),
                     marginBottom: HEIGHT * 0.02,
-                  }}>
-                  Lorem ipsum dolor sit amet consectetur. Mi vitae vel sed
-                  ultricies eleifend egestas ultricies.
-                </Text>
+                  }}></Text>
               </View>
               <View style={claimStyles.imageContainer}>
                 <Image
@@ -180,7 +196,7 @@ const Claim = () => {
               </View>
             </View>
             <View style={claimStyles.claimIdContainer}>
-              <Text style={claimStyles.titleText}>Your claim id is</Text>
+              <Text style={claimStyles.titleText}>your ID is</Text>
               <Text style={claimStyles.idText}>#34232523523</Text>
             </View>
             <View style={{height: HEIGHT * 0.05}} />
@@ -188,7 +204,8 @@ const Claim = () => {
               onPress={() => {
                 console.log('ashutosh');
               }}
-              title={'Generate claim'}
+              title={'Claim ID'}
+              borderColor={BRAND}
               width={'81%'}
             />
             <View style={{height: HEIGHT * 0.05}} />

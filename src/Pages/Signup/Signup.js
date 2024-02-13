@@ -82,7 +82,7 @@ const SignUp = ({navigation}) => {
                     fontSize: RFValue(14),
                     marginBottom: HEIGHT * 0.02,
                   }}>
-                  Sign-in to claim !
+                  Sign in to claim ID!
                 </Text>
               </View>
               <View style={loginStyles.credentialView}>
@@ -134,6 +134,7 @@ const SignUp = ({navigation}) => {
               onPress={() => navigation.navigate('Login')}
               title={'Create Account'}
               width={'81%'}
+              borderColor={BRAND}
             />
             <View
               style={{

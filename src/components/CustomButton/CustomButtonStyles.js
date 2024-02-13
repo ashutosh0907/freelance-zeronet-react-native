@@ -16,16 +16,15 @@ export const customButtonStyles = StyleSheet.create({
   text: {
     fontFamily: BOLD,
     fontSize: RFValue(15),
-    color: WHITE,
   },
   iconview: {
-    width: WIDTH * 0.06,
-    height: '70%',
+    width: WIDTH * 0.1,
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   iconimage: {
-    height: '30%',
+    height: '50%',
     width: '90%',
   },
 });

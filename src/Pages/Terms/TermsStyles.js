@@ -1,8 +1,8 @@
 import {StyleSheet} from 'react-native';
 import {BLACK, BRAND, WHITE} from '../../constants/color';
-import {BOLD, MEDIUM} from '../../constants/fontfamily';
+import {BOLD, MEDIUM, REGULAR} from '../../constants/fontfamily';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {HEIGHT} from '../../constants/config';
+import {HEIGHT, WIDTH} from '../../constants/config';
 
 export default StyleSheet.create({
   container: {
@@ -26,11 +26,15 @@ export default StyleSheet.create({
   heading: {
     color: BLACK,
     fontSize: RFValue(20),
-    fontFamily: BOLD,
+    fontFamily: MEDIUM,
+    fontWeight: '900',
+    marginBottom: HEIGHT * 0.002,
   },
   paragraph: {
-    color: BLACK,
+    color: '#787878',
     fontSize: RFValue(15),
+    fontFamily: REGULAR,
+    marginBottom: HEIGHT * 0.01,
   },
   checkboxContainer: {
     width: '90%',
@@ -40,17 +44,19 @@ export default StyleSheet.create({
     marginBottom: 20,
   },
   checkbox: {
-    width: 15,
-    height: 15,
+    width: 17,
+    height: 17,
     borderWidth: 1,
     borderColor: 'black',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
+    marginRight: WIDTH * 0.02,
+    borderRadius: 2,
   },
   checkboxLabel: {
-    color: BLACK,
-    fontSize: 16,
+    fontFamily: MEDIUM,
+    color: '#444242',
+    fontSize: RFValue(15),
   },
   buttonContainer: {
     flexDirection: 'row',

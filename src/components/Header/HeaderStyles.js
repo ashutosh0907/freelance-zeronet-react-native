@@ -23,7 +23,7 @@ export const headerStyles = StyleSheet.create({
     height: '80%',
   },
   headertextview: {
-    width: '70%',
+    width: '55%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -34,14 +34,17 @@ export const headerStyles = StyleSheet.create({
     fontFamily: SEMIBOLD,
   },
   skiptext: {
-    color: '#ED1B2F',
-    fontSize: RFValue(14),
-    fontFamily: REGULAR,
+    color: BLACK,
+    fontSize: RFValue(13),
+    fontFamily: BOLD,
   },
   skipview: {
-    width: '15%',
-    height: '100%',
+    width: '35%',
+    height: '70%',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: WHITE,
+    borderRadius: 10,
+    borderWidth: 1,
   },
 });
